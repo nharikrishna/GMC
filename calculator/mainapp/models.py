@@ -35,3 +35,12 @@ class FacultyCourse(models.Model):
     username = models.ForeignKey(Faculty, on_delete=models.CASCADE)
     course_title = models.ForeignKey(Course, on_delete=models.CASCADE)
 
+
+class Coe(models.Model):
+    username = models.CharField(primary_key=True, max_length=20)
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+
+    class Meta:
+        verbose_name_plural = 'Coe'
+

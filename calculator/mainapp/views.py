@@ -34,14 +34,11 @@ def login_view(request):
                     break
 
         else:
-            '''
-            users = Faculty.objects.all()
+            users = Coe.objects.all()
             for e in users:
                 if e.username == username:
-                    name = e.name
                     flag = 1
                     break
-            '''
 
         user = authenticate(request, username=username, password=password)
 
@@ -54,7 +51,7 @@ def login_view(request):
             elif user_type == 'faculty':
                 return redirect(view_profile_faculty_view)
             else:
-                return redirect(login_view)
+                return redirect(view_profile_coe_view)
         else:
             messages.info(request, 'Username or password is incorrect')
 
@@ -128,7 +125,7 @@ def view_course_faculty_view(request):
     return render(request, 'Faculty/view_course.html', context)
 
 
-def view_marks_faculty_view(request):
+def view_marks_faculty_view(request, course_title):
     username = request.user.username
     entry1 = Faculty.objects.get(username=username)
     context = {'e1': entry1}
@@ -141,3 +138,11 @@ def update_marks_view(request):
 
     context = {'e1': entry1}
     return render(request, 'Faculty/update_marks.html', context)
+
+
+def view_profile_coe_view(request):
+    username = request.user.username
+    entry1 = Coe.objects.get(username=username)
+
+    context = {'e1': entry1}
+    return render(request, 'COE/view_profile_coe.html', context)

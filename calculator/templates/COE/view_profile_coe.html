@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
 
-    <title>Advisor Dashboard</title>
+    <title>COE Dashboard</title>
 
     <style>
         * {
@@ -103,7 +103,7 @@
   <body>
 
     <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-        <a class="navbar-brand" href="#">Advisor Dashboard</a>
+        <a class="navbar-brand" href="#">COE Dashboard</a>
         <form id="logout_form" method="post" action="{% url 'logout' %}">
             {% csrf_token %}
             <a class="nav-link" id="logout" href="javascript:{}" onclick="document.getElementById('logout_form').submit();">Logout</a>
@@ -117,43 +117,32 @@
                     <svg class="bi bi-chevron-right" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6.646 3.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L12.293 10 6.646 4.354a.5.5 0 010-.708z"/></svg>
                     Profile
                 </a></li>
-                <li><a class="nav-link" href="class_details">
+                <li><a class="nav-link" href="grading_scheme">
                     <svg class="bi bi-chevron-right" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6.646 3.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L12.293 10 6.646 4.354a.5.5 0 010-.708z"/></svg>
-                    Class Details
+                    Grading Scheme
                 </a></li>
             </ul>
         </div>
     </div>
     <div class="content">
+        <h4 class="font-weight-bol mb-5 text-center">Profile</h4>
         <div class="inline">
-            <h5 class="font-weight-bold first" >Advisor Name: </h5>
-            <h5>{{e1.first_name}} {{e1.last_name}}</h5>
+            <h5 class="font-weight-bold first">Username</h5>
+            <h5 class="second">{{e1.username}}</h5>
+            <hr>
         </div>
-        <div class="inline mb-3">
-            <h5 class="font-weight-bold first" >Year: </h5>
-            <h5>{{e1.year}}</h5>
+
+        <div class="inline">
+            <h5 class="font-weight-bold first">First Name</h5>
+            <h5 class="second">{{e1.first_name}}</h5>
+            <hr>
         </div>
-        <h5 class="font-weight-bold mb-3 text-center">Class Details</h5>
-        <table class="table table-hover table-striped">
-          <thead>
-            <tr>
-              <th scope="col">Roll Number</th>
-              <th scope="col">First Name</th>
-              <th scope="col">Last Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for entry in e2 %}
-                 <tr>
-                    <td>{{entry.roll_number}}</td>
-                    <td>{{entry.first_name}}</td>
-                    <td>{{entry.last_name}}</td>
-                </tr>
-            {% endfor %}
-          </tbody>
 
-        </table>
-
+        <div class="inline">
+            <h5 class="font-weight-bold first">Last Name</h5>
+            <h5 class="second">{{e1.last_name}}</h5>
+            <hr>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

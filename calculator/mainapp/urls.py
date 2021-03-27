@@ -12,6 +12,7 @@ urlpatterns = [
     path('student/view_marks', views.view_marks_view, name='view_marks'),
     path('faculty/view_profile', views.view_profile_faculty_view, name='view_profile_faculty'),
     path('faculty/view_course', views.view_course_faculty_view, name='view_course_faculty'),
-    path('faculty/view_marks', views.view_marks_faculty_view, name='view_marks_faculty'),
+    path('faculty/view_marks/<str:course_title>', views.view_marks_faculty_view, name='view_marks_faculty'),
     path('faculty/update_marks', views.update_marks_view, name='view_update_marks'),
+    path('coe/view_profile', views.view_profile_coe_view, name='view_profile_coe'),
 ]
