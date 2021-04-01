@@ -89,6 +89,30 @@ def class_details_view(request):
     return render(request, 'Advisor/class_details.html', context)
 
 
+def view_course_advisor_view(request):
+    username = request.user.username
+    entry1 = Advisor.objects.get(username=username)
+    entry2 = Course.objects.filter(year=entry1.year)
+    context = {'e1': entry1, 'e2': entry2}
+    return render(request, 'Advisor/view_course.html', context)
+
+
+def view_grade_advisor_view(request, course_title):
+    username = request.user.username
+    entry1 = Advisor.objects.get(username=username)
+    entry2 = Grade.objects.get(course_title=course_title)
+    context = {'e1': entry1, 'e2': entry2}
+    return render(request, 'Advisor/view_grade.html', context)
+
+
+def view_marks_advisor_view(request):
+    username = request.user.username
+    entry1 = Advisor.objects.get(username=username)
+    entry2 = Course.objects.filter(year=entry1.year)
+    context = {'e1': entry1, 'e2': entry2}
+    return render(request, 'Advisor/view_marks.html', context)
+
+
 def view_profile_student_view(request):
     username = request.user.username
     entry1 = Student.objects.get(username=username)
@@ -125,18 +149,30 @@ def view_course_faculty_view(request):
     return render(request, 'Faculty/view_course.html', context)
 
 
+def view_course_update_faculty_view(request):
+    username = request.user.username
+    entry1 = Faculty.objects.get(username=username)
+    entry2 = FacultyCourse.objects.filter(username=username)
+    for i in entry2:
+        print(i.course_title_id)
+    context = {'e1': entry1, 'e2': entry2}
+    return render(request, 'Faculty/view_course_update.html', context)
+
+
 def view_marks_faculty_view(request, course_title):
     username = request.user.username
     entry1 = Faculty.objects.get(username=username)
-    context = {'e1': entry1}
+    entry2 = Mark.objects.filter(course_title=course_title)
+    context = {'e1': entry1, 'e2': entry2, 'course_title': course_title}
     return render(request, 'Faculty/view_marks.html', context)
 
 
-def update_marks_view(request):
+def update_marks_view(request, course_title):
     username = request.user.username
     entry1 = Faculty.objects.get(username=username)
+    entry2 = Mark.objects.filter(course_title=course_title)
 
-    context = {'e1': entry1}
+    context = {'e1': entry1, 'e2': entry2, 'course_title': course_title}
     return render(request, 'Faculty/update_marks.html', context)
 
 
@@ -146,3 +182,21 @@ def view_profile_coe_view(request):
 
     context = {'e1': entry1}
     return render(request, 'COE/view_profile_coe.html', context)
+
+
+def view_course_coe_view(request):
+    username = request.user.username
+    entry1 = Coe.objects.get(username=username)
+
+    entry2 = Course.objects.all()
+    context = {'e1': entry1, 'e2': entry2}
+    return render(request, 'COE/view_course.html', context)
+
+
+def update_grade_view(request, course_title):
+    username = request.user.username
+    entry1 = Coe.objects.get(username=username)
+
+    entry2 = Grade.objects.get(course_title=course_title)
+    context = {'e1': entry1, 'e2': entry2}
+    return render(request, 'COE/modify_grade.html', context)

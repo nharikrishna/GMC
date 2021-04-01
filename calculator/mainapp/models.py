@@ -44,3 +44,21 @@ class Coe(models.Model):
     class Meta:
         verbose_name_plural = 'Coe'
 
+
+class Grade(models.Model):
+    course_title = models.ForeignKey(Course, on_delete=models.CASCADE)
+    fromA = models.IntegerField(default=80, validators=[MinValueValidator(1), MaxValueValidator(100)])
+    toA = models.IntegerField(default=100, validators=[MinValueValidator(1), MaxValueValidator(100)])
+    fromB = models.IntegerField(default=60, validators=[MinValueValidator(1), MaxValueValidator(100)])
+    toB = models.IntegerField(default=79, validators=[MinValueValidator(1), MaxValueValidator(100)])
+    fromC = models.IntegerField(default=36, validators=[MinValueValidator(1), MaxValueValidator(100)])
+    toC = models.IntegerField(default=59, validators=[MinValueValidator(1), MaxValueValidator(100)])
+    fromF = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(100)])
+    toF = models.IntegerField(default=35, validators=[MinValueValidator(1), MaxValueValidator(100)])
+    credits = models.IntegerField(default=3, validators=[MinValueValidator(1), MaxValueValidator(4)])
+
+
+class Mark(models.Model):
+    username = models.ForeignKey(Student, on_delete=models.CASCADE)
+    course_title = models.ForeignKey(Course, on_delete=models.CASCADE)
+    marks = models.IntegerField(default=80, validators=[MinValueValidator(1), MaxValueValidator(100)])
