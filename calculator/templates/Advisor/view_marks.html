@@ -152,11 +152,20 @@
             </tr>
           </thead>
           <tbody>
-            {% for entry in e2 %}
+            {% for entry in e3 %}
              <tr>
-                <td>R101</td>
-                <td>Arif</td>
-                <td>Arif123</td>
+                {% for key, value in roll.items %}
+                    {% if entry.username == key %}
+                        <td>{{value}}</td>
+                    {% endif %}
+                {% endfor %}
+                {% for key, value in mark.items %}
+                    {% for key2,value2 in value.items %}
+                        {% if entry.username == key2 %}
+                        <td>{{value2}}</td>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
              </tr>
             {% endfor %}
           </tbody>

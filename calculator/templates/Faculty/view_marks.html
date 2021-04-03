@@ -129,6 +129,10 @@
                     <svg class="bi bi-chevron-right" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6.646 3.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L12.293 10 6.646 4.354a.5.5 0 010-.708z"/></svg>
                     Update Marks
                 </a></li>
+                <li><a class="nav-link" href="{% url 'view_course_grade' %}">
+                    <svg class="bi bi-chevron-right" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6.646 3.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L12.293 10 6.646 4.354a.5.5 0 010-.708z"/></svg>
+                    Grading Scheme
+                </a></li>
             </ul>
         </div>
     </div>
@@ -147,11 +151,27 @@
             </tr>
           </thead>
           <tbody>
-            {% for entry in e2 %}
+            {% for entry in e3 %}
              <tr>
-                <td>R101</td>
-                <td>Arif</td>
-                <td>{{entry.marks}}</td>
+                 {% for key, value in roll.items %}
+                    {% if entry.username == key %}
+                        <td>{{value}}</td>
+                    {% endif %}
+                {% endfor %}
+                {% for key, value in name.items %}
+                    {% if entry.username == key %}
+                        <td>{{value}}</td>
+                    {% endif %}
+                {% endfor %}
+                 {% for key, value in mark.items %}
+                    {% if course_title == key %}
+                        {% for key2,value2 in value.items %}
+                            {% if entry.username == key2 %}
+                            <td>{{value2}}</td>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
              </tr>
             {% endfor %}
           </tbody>
