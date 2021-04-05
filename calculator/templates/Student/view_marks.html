@@ -113,15 +113,18 @@
         <div class="sidebar">
             <ul>
                 <h4 class="helloname">Hello, {{e1.first_name}}</h4>
-                <li><a class="nav-link" href="view_profile">
+                <li><a class="nav-link" href="{% url 'view_profile_student' %}">
                     <svg class="bi bi-chevron-right" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6.646 3.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L12.293 10 6.646 4.354a.5.5 0 010-.708z"/></svg>
                     Profile
                 </a></li>
-                <li><a class="nav-link" href="view_marks">
+                <li><a class="nav-link" href="{% url 'view_marks' %}">
                     <svg class="bi bi-chevron-right" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6.646 3.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L12.293 10 6.646 4.354a.5.5 0 010-.708z"/></svg>
                     View Marks
                 </a></li>
-            </ul>
+                <li><a class="nav-link" href="{% url 'student_view_course' %}">
+                    <svg class="bi bi-chevron-right" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6.646 3.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L12.293 10 6.646 4.354a.5.5 0 010-.708z"/></svg>
+                    Grading Scheme
+                </a></li>
         </div>
     </div>
     <div class="content">
@@ -139,25 +142,20 @@
           <thead>
             <tr>
               <th scope="col">Course Code</th>
-              <th scope="col">Grade</th>
               <th scope="col">Marks</th>
             </tr>
           </thead>
           <tbody>
             {% for entry in e2 %}
                  <tr>
-                    <td>{{entry.course_title}}</td>
-                    <td>A</td>
-                    <td>85</td>
+                    <td>{{entry.course_title_id}}</td>
+                    <td>{{entry.marks}}</td>
                  </tr>
             {% endfor %}
           </tbody>
 
         </table>
-        <div class="inline text-center mt-5">
-            <h5 class="font-weight-bold first">CGPA: </h5>
-            <h5>8</h5>
-        </div>
+
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

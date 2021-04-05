@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
-
 from .models import *
 
 
@@ -141,11 +141,28 @@ def view_marks_view(request):
     entry1 = Student.objects.get(username=username)
     year = entry1.year
 
-    entry2 = Course.objects.filter(year=year)
-    for e in entry2:
-        print(e.course_title)
+    entry2 = Mark.objects.filter(username=username)
+
+    for i in entry2:
+        print(i.course_title_id, i.marks)
     context = {'e1': entry1, 'e2': entry2}
     return render(request, 'Student/view_marks.html', context)
+
+
+def student_view_course_view(request):
+    username = request.user.username
+    entry1 = Student.objects.get(username=username)
+    entry2 = Course.objects.filter(year=entry1.year)
+    context = {'e1': entry1, 'e2': entry2}
+    return render(request, 'Student/view_course_grade.html', context)
+
+
+def student_view_grade_view(request, course_title):
+    username = request.user.username
+    entry1 = Student.objects.get(username=username)
+    entry2 = Grade.objects.get(course_title=course_title)
+    context = {'e1': entry1, 'e2': entry2}
+    return render(request, 'Student/view_grade.html', context)
 
 
 def view_profile_faculty_view(request):
@@ -309,3 +326,60 @@ def update_grade_view(request, course_title):
     entry2 = Grade.objects.get(course_title=course_title)
     context = {'e1': entry1, 'e2': entry2}
     return render(request, 'COE/modify_grade.html', context)
+
+
+def advisor_change_password_view(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(request.user,request.POST)
+        if form.is_valid():
+
+            user = form.save()
+            update_session_auth_hash(request,user)
+            return redirect('view_profile_advisor')
+        else:
+            messages.error(request,"Please Correct the error")
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'Advisor/change_password.html', {'form': form})
+
+
+def student_change_password_view(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(request.user,request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request,user)
+            return redirect('view_profile_student')
+        else:
+            messages.error(request,"Please Correct the error")
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'Student/change_password.html',{'form':form})
+
+
+def faculty_change_password_view(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(request.user,request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request,user)
+            return redirect('view_profile_faculty')
+        else:
+            messages.error(request,"Please Correct the error")
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'Faculty/change_password.html',{'form':form})
+
+
+def coe_change_password_view(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(request.user,request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request,user)
+            return redirect('view_profile_coe')
+        else:
+            messages.error(request,"Please Correct the error")
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'COE/change_password.html',{'form':form})

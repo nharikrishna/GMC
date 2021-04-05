@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
 
-    <title>COE Dashboard</title>
+    <title>Faculty Dashboard</title>
 
     <style>
         * {
@@ -111,7 +111,7 @@
   <body>
 
     <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-        <a class="navbar-brand" href="#">Advisor Dashboard</a>
+        <a class="navbar-brand" href="#">Faculty Dashboard</a>
         <form id="logout_form" method="post" action="{% url 'logout' %}">
             {% csrf_token %}
             <a class="nav-link" id="logout" href="javascript:{}" onclick="document.getElementById('logout_form').submit();">Logout</a>
