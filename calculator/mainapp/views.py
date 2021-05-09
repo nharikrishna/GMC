@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
-from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm
 from django.contrib import messages
 from .models import *
 
@@ -127,6 +127,15 @@ def view_marks_advisor_view(request):
 
     context = {'e1': entry1, 'e2': entry2, 'e3': entry3, 'roll': roll, 'mark': course_mark}
     return render(request, 'Advisor/view_marks.html', context)
+
+
+def approve_events_view(request):
+    username = request.user.username
+    entry1 = Advisor.objects.get(username=username)
+    entry2 = Student.objects.filter(year=entry1.year)
+    entry3 = Event.objects.all()
+    context = {'e1': entry1, 'e2': entry2, 'e3': entry3}
+    return render(request, 'Advisor/approve_events.html', context)
 
 
 def view_profile_student_view(request):
@@ -330,14 +339,14 @@ def update_grade_view(request, course_title):
 
 def advisor_change_password_view(request):
     if request.method == "POST":
-        form = PasswordChangeForm(request.user,request.POST)
+        form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
 
             user = form.save()
-            update_session_auth_hash(request,user)
+            update_session_auth_hash(request, user)
             return redirect('view_profile_advisor')
         else:
-            messages.error(request,"Please Correct the error")
+            messages.error(request, "Please Correct the error")
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'Advisor/change_password.html', {'form': form})
@@ -345,41 +354,42 @@ def advisor_change_password_view(request):
 
 def student_change_password_view(request):
     if request.method == "POST":
-        form = PasswordChangeForm(request.user,request.POST)
+        form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
-            update_session_auth_hash(request,user)
+            update_session_auth_hash(request, user)
             return redirect('view_profile_student')
         else:
-            messages.error(request,"Please Correct the error")
+            messages.error(request, "Please Correct the error")
     else:
         form = PasswordChangeForm(request.user)
-    return render(request, 'Student/change_password.html',{'form':form})
+    return render(request, 'Student/change_password.html', {'form': form})
 
 
 def faculty_change_password_view(request):
     if request.method == "POST":
-        form = PasswordChangeForm(request.user,request.POST)
+        form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
-            update_session_auth_hash(request,user)
+            update_session_auth_hash(request, user)
             return redirect('view_profile_faculty')
         else:
-            messages.error(request,"Please Correct the error")
+            messages.error(request, "Please Correct the error")
     else:
         form = PasswordChangeForm(request.user)
-    return render(request, 'Faculty/change_password.html',{'form':form})
+    return render(request, 'Faculty/change_password.html', {'form': form})
 
 
 def coe_change_password_view(request):
     if request.method == "POST":
-        form = PasswordChangeForm(request.user,request.POST)
+        form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
-            update_session_auth_hash(request,user)
+            update_session_auth_hash(request, user)
             return redirect('view_profile_coe')
         else:
-            messages.error(request,"Please Correct the error")
+            messages.error(request, "Please Correct the error")
     else:
         form = PasswordChangeForm(request.user)
-    return render(request, 'COE/change_password.html',{'form':form})
+    return render(request, 'COE/change_password.html', {'form':form})
+

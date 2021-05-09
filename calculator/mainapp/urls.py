@@ -12,12 +12,19 @@ urlpatterns = [
     path('', views.login_view, name='home'),
     path('check', views.check_view, name='check'),
     path('logout', views.logout_view, name='logout'),
+
+    path('reset_password/', auth_views.PasswordResetView.as_view(template_name='reset_password.html'), name='reset_password'),
+    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name='reset_password_sent.html'), name='password_reset_done'),
+    path('reset/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(template_name='reset_password_form.html'), name='password_reset_confirm'),
+    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name='reset_password_done.html'), name='password_reset_complete'),
+
     path('advisor/change_password',views.advisor_change_password_view,name = 'change_password_advisor'),
     path('advisor/view_profile', views.view_profile_advisor_view, name='view_profile_advisor'),
     path('advisor/class_details', views.class_details_view, name='class_details'),
     path('advisor/view_course', views.view_course_advisor_view, name='view_course_advisor'),
     path('advisor/view_grade/<str:course_title>', views.view_grade_advisor_view, name='view_grade_advisor'),
     path('advisor/view_marks', views.view_marks_advisor_view, name='view_marks_advisor'),
+    path('advisor/approve_events', views.approve_events_view, name='approve_events'),
 
     path('student/view_profile', views.view_profile_student_view, name='view_profile_student'),
     path('student/view_marks', views.view_marks_view, name='view_marks'),

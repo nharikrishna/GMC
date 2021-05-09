@@ -8,6 +8,7 @@ class Student(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     year = models.IntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(4)])
+    grace_marks = models.IntegerField(default=0, validators=[MinValueValidator(1), MaxValueValidator(4)])
 
 
 class Advisor(models.Model):
@@ -62,3 +63,8 @@ class Mark(models.Model):
     username = models.ForeignKey(Student, on_delete=models.CASCADE)
     course_title = models.ForeignKey(Course, on_delete=models.CASCADE)
     marks = models.IntegerField(default=80, validators=[MinValueValidator(1), MaxValueValidator(100)])
+
+
+class Event(models.Model):
+    username = models.ForeignKey(Student, on_delete=models.CASCADE)
+    no_of_events = models.IntegerField(default=0)
