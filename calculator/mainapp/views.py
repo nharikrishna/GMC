@@ -130,10 +130,28 @@ def view_marks_advisor_view(request):
 
 
 def approve_events_view(request):
+    if request.method == 'POST':
+        entry = Student.objects.all()
+        for i in entry:
+            if request.POST.get(i.username + "+name"):
+                events = request.POST.get(i.username+"+event")
+                print(i.username, events)
+                row_entry = Event.objects.get(username=i.username)
+                row_entry.is_approved = True
+                row_entry.save(update_fields=['is_approved'])
+
+                row_entry2 = Student.objects.get(username=i.username)
+                grace_marks = min(20, 5 * int(events))
+                print(grace_marks)
+                row_entry2.grace_marks = grace_marks
+                row_entry2.save(update_fields=['grace_marks'])
+
+        messages.success(request, 'Approved!')
+
     username = request.user.username
     entry1 = Advisor.objects.get(username=username)
     entry2 = Student.objects.filter(year=entry1.year)
-    entry3 = Event.objects.all()
+    entry3 = Event.objects.filter(is_approved=False)
     context = {'e1': entry1, 'e2': entry2, 'e3': entry3}
     return render(request, 'Advisor/approve_events.html', context)
 
@@ -172,6 +190,22 @@ def student_view_grade_view(request, course_title):
     entry2 = Grade.objects.get(course_title=course_title)
     context = {'e1': entry1, 'e2': entry2}
     return render(request, 'Student/view_grade.html', context)
+
+
+def events_form_view(request):
+    username = request.user.username
+
+    entry1 = Student.objects.get(username=username)
+    eventobj = Event.objects.get(username=username)
+    print(eventobj.no_of_events)
+    temp = ""
+    if request.method == "POST":
+        temp = request.POST.get("events")
+        eventobj.no_of_events = temp
+        eventobj.save(update_fields = ['no_of_events'])
+
+    context = {'e1': entry1, 'e2': eventobj}
+    return render(request, 'Student/events_form.html', context)
 
 
 def view_profile_faculty_view(request):
