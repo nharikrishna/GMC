@@ -427,6 +427,7 @@ def coe_change_password_view(request):
         form = PasswordChangeForm(request.user)
     return render(request, 'COE/change_password.html', {'form':form})
 
+
 def events_form(request):
     username = request.user.username
 
@@ -439,7 +440,6 @@ def events_form(request):
         eventobj.no_of_events = temp
         eventobj.save(update_fields = ['no_of_events'])
 
-
     context = {'e1': entry1, 'e2': eventobj}
-    return render(request,'Student/Events_form.html',context)
+    return render(request, 'Student/events_form.html', context)
 
