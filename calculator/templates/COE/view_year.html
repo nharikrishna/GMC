@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
 
-    <title>COE Dashboard</title>
+    <title>Faculty Dashboard</title>
 
     <style>
         * {
@@ -137,13 +137,32 @@
         </div>
     </div>
     <div class="content">
-        <h4 class="font-weight-bol text-center">Select the course you want to update</h4>
+        <h4 class="font-weight-bol text-center">Select the year you want to view/apply</h4>
         <div class="row row-cols-2">
+            <div class="col">
+                    <div class="card mt-5" style="width: 18rem; height: 10rem;">
+                        <div class="card-body m-auto">
+                            <a class="nav-link" href="{% url 'grace_mark_calculate' '1' %}">
+                                <h5 class="card-title" style="padding-top: 50%; width: 120%;">Year 1</h5>
+                            </a>
+                        </div>
+                    </div>
+            </div>
+            <div class="col">
+                    <div class="card mt-5" style="width: 18rem; height: 10rem;">
+                        <div class="card-body m-auto">
+                            <a class="nav-link" href="{% url 'grace_mark_calculate' '2' %}">
+                                <h5 class="card-title" style="padding-top: 50%; width: 120%;">Year 2</h5>
+                            </a>
+                        </div>
+                    </div>
+            </div>
+
             {% for entry in e2 %}
                 <div class="col">
                     <div class="card mt-5" style="width: 18rem; height: 10rem;">
                         <div class="card-body m-auto">
-                            <a class="nav-link" href="{% url 'update_grade' entry.course_title %}">
+                            <a class="nav-link" href="{% url 'view_grade_faculty' entry.course_title %}">
                                 <h5 class="card-title" style="padding-top: 50%; width: 120%;">{{entry.course_title}}</h5>
                             </a>
                         </div>
