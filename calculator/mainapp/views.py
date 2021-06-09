@@ -113,7 +113,6 @@ def view_marks_advisor_view(request):
     entry1 = Advisor.objects.get(username=username)
     entry2 = Course.objects.filter(year=entry1.year)
     entry3 = Student.objects.filter(year=entry1.year)
-
     roll = {}
     for i in entry3:
         roll[i.username] = i.roll_number
@@ -129,6 +128,7 @@ def view_marks_advisor_view(request):
     print(course_mark)
 
     context = {'e1': entry1, 'e2': entry2, 'e3': entry3, 'roll': roll, 'mark': course_mark}
+    print(entry3)
     return render(request, 'Advisor/view_marks.html', context)
 
 
