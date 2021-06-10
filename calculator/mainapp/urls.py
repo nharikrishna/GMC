@@ -31,7 +31,7 @@ urlpatterns = [
     path('student/change_password', views.student_change_password_view, name='change_password_student'),
     path('student/view_course', views.student_view_course_view, name='student_view_course'),
     path('student/view_grade/<str:course_title>', views.student_view_grade_view, name='student_view_grade'),
-    path('student/event', views.events_form, name='events'),
+    path('student/event', views.events_form_view, name='events'),
 
     path('faculty/view_profile', views.view_profile_faculty_view, name='view_profile_faculty'),
     path('faculty/view_course', views.view_course_faculty_view, name='view_course_faculty'),
@@ -45,5 +45,7 @@ urlpatterns = [
     path('coe/view_profile', views.view_profile_coe_view, name='view_profile_coe'),
     path('coe/view_course', views.view_course_coe_view, name='view_course_coe'),
     path('coe/update_grade/<str:course_title>', views.update_grade_view, name='update_grade'),
-    path('coe/change_password', views.coe_change_password_view, name='change_password_coe')
+    path('coe/change_password', views.coe_change_password_view, name='change_password_coe'),
+    path('coe/view_year', views.view_year_view, name='view_level'),
+    path('coe/grace_mark_calculate/<str:year>', views.grace_mark_calculate_view, name='grace_mark_calculate')
 ]
